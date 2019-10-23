@@ -1,0 +1,48 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" 
+                controller="BoatSearchResults" access="global" >
+    
+    <!--  Spinner --> 
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}" description="waiting for server"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}" description="server call complete"/>
+    <aura:attribute name="Spinner" type="boolean" default="false" description="to show hide the spinner"/>
+    <!-- Spinner end -->
+    
+	<aura:attribute name="boats" type="Boat__c[]" />
+    <aura:attribute name="selectedBoatId" type="String" default="null"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+	<aura:attribute name="boatselectTypeId" type="String"/>
+    
+    <aura:handler name="BoatSelect" event="c:BoatSelect" action="{!c.onBoatSelect}"/>
+    
+    <aura:method name="search" access="global" action="{!c.search}" >
+        <aura:attribute name="boatTypeId" type="String"/>
+    </aura:method>
+    
+    <aura:if isTrue="{!v.Spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--small slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    
+    <lightning:layout multipleRows="true" horizontalAlign="center">
+
+    	    <aura:iteration items="{!v.boats}" var="boat">
+                <lightning:layoutItem flexibility="grow"  class="slds-m-right_small" >   
+                	<c:BoatTile boat="{!boat}" selected="{!boat.Id == v.selectedBoatId ? true : false}"/>
+                </lightning:layoutItem>
+            </aura:iteration>
+    		
+               
+            <aura:if isTrue="{!v.boats.length==0}">
+                <lightning:layoutItem class="slds-align_absolute-center" flexibility="auto" padding="around-small">   
+                    <ui:outputText value="No boats found" />
+                </lightning:layoutItem>
+            </aura:if>
+
+    </lightning:layout>
+    
+</aura:component>

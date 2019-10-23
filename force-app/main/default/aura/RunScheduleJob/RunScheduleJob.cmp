@@ -1,0 +1,8 @@
+<aura:component controller="Schedulejobsctrl" implements="force:appHostable,flexipage:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute type="String" name="variantval" default="brand" />
+    <aura:handler name="init" value="this" action="{!c.doInit}"/>
+
+    <lightning:button variant="Brand" label="Run Custom Job" title="Run Custom Job" onclick="{!c.customjobaction}"/>
+    <lightning:button variant="Neutral"  label="Run Regular Job" title="Run Regular Job" onclick="{!c.regularjobaction}"/>
+    
+</aura:component>

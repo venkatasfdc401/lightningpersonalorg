@@ -1,0 +1,31 @@
+<apex:page standardController="Contact">
+     <apeX:form >
+         <apex:pageBlock >
+         <apex:pageBlockSection >
+             <apex:inputField value="{!contact.FirstName}" />
+             <apex:inputField value="{!contact.LastName}" />
+             <apex:inputField value="{!contact.Email}" />
+        </apex:pageBlockSection>     
+         <apex:pageBlockButtons >
+             <apex:commandButton value="Save" Action="{!save}"/>
+         </apex:pageBlockButtons>
+         </apex:pageBlock>
+         
+         <apex:pageBlock title="Opportunities">
+                 <apex:pageBlockTable value="{!Contact.Opportunities__r}" var="Opportunity">
+                <apex:column >
+                    <apex:outputLink value="{! URLFOR($Action.Opportunity.Edit, Opportunity.Id) }">
+                        Edit
+                    </apex:outputLink>
+                    &nbsp;
+                    <apex:outputLink value="{! URLFOR($Action.Opportunity.Delete, Opportunity.Id) }">
+                        Del
+                    </apex:outputLink>
+                </apex:column>
+                <apex:column value="{!Opportunity.Name}"/>
+                <apex:column value="{!Opportunity.Closedate}"/>
+                <apex:column value="{!Opportunity.stagename}"/>
+           </apex:pageBlockTable>
+         </apex:pageBlock>
+     </apeX:form>
+</apex:page>

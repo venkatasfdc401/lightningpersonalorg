@@ -1,0 +1,20 @@
+<apex:page standardController="Account">
+
+        
+
+        <apex:includeLightning />
+
+        <div id="lightning"/>
+      <script>
+            $Lightning.use("c:urlredirectAPP", function() {
+            $Lightning.createComponent("c:urlredirect",
+            { 
+            "VFpageValue" : "Woohoooo, Lightning Out is an amazing feature of Salesforce Lightning"
+            },
+            "lightning",
+            function(cmp) {
+            });
+            });
+    
+    </script>
+    </apex:page>

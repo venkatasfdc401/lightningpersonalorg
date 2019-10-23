@@ -1,0 +1,31 @@
+<apex:page standardController="Contact" recordSetvar="Cont"  renderAs="PDF">
+
+<apex:pageBlock >
+
+<table border="1" width="100%">
+
+<tr><th>Name</th>
+<th>Account</th>
+<th>Phone</th> 
+</tr>
+<apex:repeat value="{!Cont}" var="Contactrec" >
+
+<apex:variable value="{!0}" var="count">
+<apex:variable value="{!count+1}" var="countvalue">                       
+<tr><td><apex:outputtext value="{!Contactrec.name}"/></td>
+<td><apex:outputtext value="{!Contactrec.Account.Name}"/></td>
+<td><apex:outputtext value="{!Contactrec.Phone}"/></td>
+
+</tr>
+</apex:variable>
+</apex:variable>
+
+</apex:repeat>
+</table>
+
+
+
+
+</apex:pageBlock>
+
+</apex:page>

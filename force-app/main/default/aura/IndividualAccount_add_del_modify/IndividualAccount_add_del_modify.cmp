@@ -1,0 +1,44 @@
+<aura:component implements="flexipage:availableForAllPageTypes"
+                controller="Account_DynamicADDDELMOD" access="global" >
+	
+    <!-- Register 2 Lightning Event for handle add or Delete rows on Parent Component  -->
+    <aura:registerEvent name="DeleteRowEvent" type="c:Account_delevt"/> 
+    <aura:registerEvent name="AddRowEvent" type="c:Account_Addevt"/> 
+    
+    <aura:attribute type="Account" name="AccountInstance" />
+    <aura:attribute name="rowIndex" type="String"/>
+    
+    <!--<aura:handler name="init" value="{!this}" action="{!c.doinit}" />-->
+    
+    <!-- Table Row -->  
+    <tr class="slds-text-title_caps">
+        <td> 
+            {!v.rowIndex + 1}
+        </td>
+        <td>
+            <ui:inputText class="slds-input" value="{!v.AccountInstance.Name}"/>
+        </td>
+        <td>
+            <ui:inputText  class="slds-input" value="{!v.AccountInstance.AccountNumber}"/>
+        </td>
+        <td>
+            <ui:inputPhone class="slds-input" value="{!v.AccountInstance.Phone}"/>
+        </td>
+        <td>
+            <!-- conditionally Display Add or Delete Icons, if rowIndex is 0 then show add row Icon else show delete Icon-->
+            <aura:if isTrue="{!v.rowIndex == 0}">
+                <a onclick="{!c.addRow}">
+                    <lightning:icon iconName="utility:add" class="slds-icon slds-icon_small" size="small" alternativeText="Add"/>
+                    <span class="slds-assistive-text">Add</span>
+                </a>    
+                <aura:set attribute="else">
+                    <a onclick="{!c.deleteRow}" data-action="{!v.AccountInstance.id}">
+                        <lightning:icon variant="error" iconName="utility:delete" class="slds-icon slds-icon_small" size="small" alternativeText="Delete"/>
+                        <span class="slds-assistive-text">Delete</span>
+                    </a>
+                </aura:set> 
+            </aura:if>
+        </td> 
+    </tr>
+    
+</aura:component>

@@ -1,0 +1,12 @@
+<aura:component implements="force:appHostable,lightning:isUrlAddressable" >
+	<aura:attribute name="recordId"
+                    	type="String"
+                    	description="ID of the record."/>
+ 
+    	<aura:handler name="init"
+		      value="this"
+                      action="{!c.doInit}"/>
+     <aura:registerEvent name="sampleCmpEvent" type="c:SampleComponentEvent" />
+    <lightning:button label="Click to fire the event" variant="brand" onclick="{!c.childComponentEvent}"/>
+
+</aura:component>

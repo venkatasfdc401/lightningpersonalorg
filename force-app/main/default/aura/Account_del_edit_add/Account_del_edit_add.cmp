@@ -1,0 +1,58 @@
+<aura:component 
+                implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes"
+                controller="Account_DynamicADDDELMOD"
+                access="global" >
+    
+    <aura:attribute type="Account[]" name="AccountList" />
+    <aura:attribute type="string" name="Accountrecordsmsg" />
+    <!--Init handler which is call doInit js function on component Load--> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <!--Event handler for Add and Delete Row Event which is execute from Child Component-->   
+    <aura:handler name="DeleteRowEvent" event="c:Account_delevt" action="{!c.removeDeletedRow}"/>
+    <aura:handler name="AddRowEvent" event="c:Account_Addevt" action="{!c.addRow}"/>
+     
+    <!--Aura Attribute for store Account Object List as Array-->   
+    
+     
+    <!--Header Part-->       
+    <div class="slds-page-header">
+        <h1 class="slds-page-header__title">Create / Modify Multiple Accounts in Lightning</h1>
+    </div>
+     
+    <!--Table Part-->          
+    <table class="slds-table slds-table_bordered slds-table_cell-buffer"> 
+        <thead>
+            <tr class="slds-text-title_caps">
+                <th scope="col">
+                    <div class="slds-truncate">#</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Account Name">Account Name</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Account Number">Account Number</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate" title="Phone">Phone</div>
+                </th>
+                 <th scope="col">
+                    <div class="slds-truncate" title="Action">Action</div>
+                </th>
+            </tr>
+        </thead>   
+        <tbody>
+            <!--Iterate the child Component for display Table rows 
+               with pass the List Item Index for track the Every child Component 
+               and pass each List Account Instance -->        
+            <aura:iteration items="{!v.AccountList}" var="item" indexVar="index">
+                <c:IndividualAccount_add_del_modify AccountInstance="{!item}" rowIndex="{!index}" />
+            </aura:iteration>
+        </tbody>
+    </table>
+    <br/>
+    <div class="slds-align_absolute-center">
+    	<button class="slds-button slds-button_brand" onclick="{!c.Save}">Save</button>
+    </div>
+    
+</aura:component>
